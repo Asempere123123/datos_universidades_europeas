@@ -12,12 +12,16 @@ target_divs = soup.find_all('div', class_=target_classes)
 c=0
 clases_ubicacion = ["uni-card__geo", "text-center"]
 for div in target_divs:
+    ubicacion = div.find("div", class_=clases_ubicacion)
+    if not ubicacion:
+        continue
+
     name = div.find("h2")
     if not name:
         continue
 
-    ubicacion = div.find("div", class_=clases_ubicacion)
     print(name.text)
+    print(ubicacion)
     c+=1
 
 print(c)
