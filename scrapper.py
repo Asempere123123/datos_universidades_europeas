@@ -2,7 +2,6 @@ import requests
 from bs4 import BeautifulSoup
 import sqlite3
 
-
 from data.all_categories import processed_categories
 
 conn = sqlite3.connect("data/universidades.db")
