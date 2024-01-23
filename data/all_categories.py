@@ -3,7 +3,7 @@ categories = [["Overall", "/geo/eu/", []], ["Art & Design", "/art-design/eu/", [
 
 processed_categories = []
 for general_categorie in categories:
-    processed_categories.append((general_categorie[0], general_categorie[1]))
+    processed_categories.append((general_categorie[0], general_categorie[1], general_categorie[0]))
 
     for specific_categorie in general_categorie[2]:
-        processed_categories.append((specific_categorie[0], specific_categorie[1]))
+        processed_categories.append((specific_categorie[0], specific_categorie[1], general_categorie[0]))

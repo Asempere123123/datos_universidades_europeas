@@ -7,7 +7,7 @@ from data.all_categories import processed_categories
 conn = sqlite3.connect("data/universidades.db")
 cur = conn.cursor()
 
-def add_entry_to_database(url, categoria):
+def add_entry_to_database(url, categoria, grupo_general):
     print("https://edurank.org" + url)
     response = requests.get("https://edurank.org" + url)
     filtrado_por = categoria
@@ -56,9 +56,9 @@ def add_entry_to_database(url, categoria):
             elif dato_titulo.text == "Enrollment":
                 cantidad_matriculados = dato_valor.text
 
-        data = (nombre, ubicacion.text, posicion_local.text, posicion_global.text, posicion_europa, tasa_aceptacion, cantidad_matriculados, filtrado_por)
+        data = (nombre, ubicacion.text, posicion_local.text, posicion_global.text, posicion_europa, tasa_aceptacion, cantidad_matriculados, filtrado_por, grupo_general)
         try:
-            cur.execute("INSERT OR IGNORE INTO universidades (nombre, ubicacion, posicion_local, posicion_global, posicion_europa, tasa_acceptacion, cantidad_matriculados, filtrado_por) VALUES(?, ?, ?, ?, ?, ?, ?, ?);", data)
+            cur.execute("INSERT OR IGNORE INTO universidades (nombre, ubicacion, posicion_local, posicion_global, posicion_europa, tasa_acceptacion, cantidad_matriculados, filtrado_por, general_group) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?);", data)
         except:
             print("No se ha podido añadir la siguiente universidad:")
             print(data)
@@ -66,4 +66,4 @@ def add_entry_to_database(url, categoria):
     conn.commit()
 
 for categorie in processed_categories:
-    add_entry_to_database(categorie[1], categorie[0])
+    add_entry_to_database(categorie[1], categorie[0], categorie[2])
